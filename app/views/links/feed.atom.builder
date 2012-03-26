@@ -4,7 +4,7 @@ atom_feed :language => 'en-US' do |feed|
 
   @links.each do |item|
     next if item.updated_at.blank?
-    feed.entry( item ) do |entry|
+    feed.entry( item, url: item.url ) do |entry|
       entry.url item.url
       entry.title item.url
       entry.content item.description, :type => 'html'

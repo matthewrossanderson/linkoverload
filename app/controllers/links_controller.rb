@@ -32,7 +32,7 @@ class LinksController < ApplicationController
       @links = Link.all
 
       # this will be our Feed's update timestamp
-      @updated = @links.first.updated_at unless @links.empty?
+      @updated = @links.last.updated_at unless @links.empty?
 
       respond_to do |format|
         format.atom { render :layout => false }

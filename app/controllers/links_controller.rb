@@ -23,16 +23,24 @@ class LinksController < ApplicationController
     end
   end
   
-  def viewfeed
-    require 'rss'
-    Rails.cache.fetch("rss-list") do
-      RSS::Parser.parse(open('http://feeds.feedburner.com/your-stuff-here').read, false).items[0..4]
-    end
+  def feed
+      
+      # this will be the name of the feed displayed on the feed reader
+      @title = "LinkOverload"
+
+      # the links
+      @links = Link.all
+
+      # this will be our Feed's update timestamp
+      @updated = @links.first.updated_at unless @links.empty?
+
+      respond_to do |format|
+        format.atom { render :layout => false }
+        # we want the RSS feed to redirect permanently to the ATOM feed
+        format.rss { redirect_to feed_path(:format => :atom), :status => :moved_permanently }
+      end
   end
   
-  def feed
-    @links = Link.all
-  end
 
   # GET /links/new
   # GET /links/new.json
@@ -57,7 +65,8 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if @link.save
-        format.html { redirect_to @link, notice: 'Link was successfully created.' }
+        flash[:success] = "Successfully Added Link."
+        format.html { redirect_to action: "index" }
         format.json { render json: @link, status: :created, location: @link }
       else
         format.html { render action: "new" }
@@ -87,6 +96,7 @@ class LinksController < ApplicationController
   def destroy
     @link = Link.find(params[:id])
     @link.destroy
+    flash[:warning] = "Successfully Removed Link."
 
     respond_to do |format|
       format.html { redirect_to links_url }

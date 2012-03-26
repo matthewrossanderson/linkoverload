@@ -1,28 +1,32 @@
 <div class="center">
-<h1>Home</h1>
+  <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+<h1>Incoming Links</h1>
 
-<table class = 'linktable'>
+<table class = 'linktable table well table-bordered table-striped table-condensed'>
   <tr>
     <th>What</th>
+    <th>Why</th>
     <th>Who</th>
     <th>When</th>
-    <th>Why</th>
-    <th></th>
-    <th></th>
-    <th></th>
+  
+
   </tr>
 
 <% @links.each do |link| %>
   <tr>
-    <td><%= link.url %></td>
+    <td><%= link_to link.url, link.url %></td>
+    <td><%= link.description %></td>
     <td><%= link.submitter %></td>
     <td><%= link.created_at %></td>
-    <td><%= link.description %></td>
+    <td> <%= link_to 'Remove', link_path(link.id) , method: "delete", class: "btn btn-danger btn-mini" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Link', new_link_path, class: "btn btn-large btn-primary" %>
+<%= link_to 'New Link', new_link_path, class: "btn btn-large btn-primary"  %>
+<%= link_to 'RSS Feed', '/feed',  target: "_blank",  class: "btn btn-small" %>
 </div>

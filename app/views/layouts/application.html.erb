@@ -1,6 +1,10 @@
+
 <!DOCTYPE html>
 <html>
   <head>
+    <%= auto_discovery_link_tag :atom, "/feed" %>
+    <%= auto_discovery_link_tag :rss, "/feed.rss" %>
+
     <title>LinkOverload</title>
     <%= stylesheet_link_tag    "application", media: "all" %>
     <%= javascript_include_tag "application" %>
@@ -13,7 +17,7 @@
     <header class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "LinkOverload", '#', id: "logo" %>
+          <%= link_to "LinkOverload", '/', id: "logo" %>
           <nav>
             <ul class="nav pull-right">
             </ul>

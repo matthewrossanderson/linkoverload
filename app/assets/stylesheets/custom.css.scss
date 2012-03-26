@@ -74,6 +74,14 @@ p {
   text-decoration: none;
 }
 
-.linktable tr {
-	padding-right: 10px;
+.linktable {
+  border:1px #DDD solid;
+}
+
+.linktable td {
+	padding-top:10px;
+}
+
+body {
+  background-color:#DDD;
 }

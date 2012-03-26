@@ -1,6 +1,8 @@
 class LinksController < ApplicationController
   # GET /links
   # GET /links.json
+  
+  
   def index
     @links = Link.all
 
@@ -19,6 +21,17 @@ class LinksController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @link }
     end
+  end
+  
+  def viewfeed
+    require 'rss'
+    Rails.cache.fetch("rss-list") do
+      RSS::Parser.parse(open('http://feeds.feedburner.com/your-stuff-here').read, false).items[0..4]
+    end
+  end
+  
+  def feed
+    @links = Link.all
   end
 
   # GET /links/new

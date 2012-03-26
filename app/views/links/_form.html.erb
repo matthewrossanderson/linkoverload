@@ -17,13 +17,12 @@
   </div>
   <div class="field">
     Why should I click it?<br />
-    <%= f.text_area :description %>
+    <%= f.text_area :description, cols: 10, rows: 5 %>
   </div>
   <div class="field">
     Who are you?<br />
     <%= f.text_field :submitter %>
   </div>
-  <%= f.hidden_field :submitted %>
   <div class="actions">
     <%= f.submit "Overload!"%>
   </div>

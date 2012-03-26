@@ -1,5 +1,15 @@
 Linkoverload::Application.routes.draw do
-  resources :links
+  resources :links do
+    collection do
+      get 'feed'
+    end
+  end
+  
+  # You can have the root of your site routed with "root"
+   # just remember to delete public/index.html.
+  root :to => 'links#new'
+   
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -48,9 +58,8 @@ Linkoverload::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => 'links#index'
+ 
+  
 
   # See how all your routes lay out with "rake routes"
 

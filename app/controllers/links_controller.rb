@@ -4,7 +4,7 @@ class LinksController < ApplicationController
   
   
   def index
-    @links = Link.all
+    @links = Link.todays_links
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,8 +28,8 @@ class LinksController < ApplicationController
       # this will be the name of the feed displayed on the feed reader
       @title = "LinkOverload"
 
-      # the links
-      @links = Link.all
+      # the links from today
+      @links = Link.todays_links
 
       # this will be our Feed's update timestamp
       @updated = @links.last.updated_at unless @links.empty?

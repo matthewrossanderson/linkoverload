@@ -2,7 +2,7 @@
   <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
-<h1>Incoming Links</h1>
+<h1>Links from Today</h1>
 
 <table class = 'linktable table well table-bordered table-striped table-condensed'>
   <tr>
@@ -16,7 +16,7 @@
 
 <% @links.each do |link| %>
   <tr>
-    <td><%= link_to link.url, link.url %></td>
+    <td><%= link_to link.url, link.url, target: "_blank" %></td>
     <td><%= link.description %></td>
     <td><%= link.submitter %></td>
     <td><%= link.created_at %></td>
